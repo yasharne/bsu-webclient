@@ -1,0 +1,175 @@
+<div class="generic-container" ng-controller="QuestionController as ctrl">
+  <h2>Question Sets</h2>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#newQuestionSet" ng-click="ctrl.fetchCategories()">
+      New Question Set
+    </button>
+
+    <div class="modal fade" id="newQuestionSet" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Question Set</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="name">Question set's Name: </label>
+                <input type="text" class="form-controll" id="Name" placeholder="Enter name for Question set" ng-model="ctrl.name">
+              </div>
+              <div>
+                <label for="name" for="category">Question set's Category: </label>
+                <select ng-options="cat.name for cat in ctrl.categories" ng-model="ctrl.category"></select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ctrl.newQuestionSet(ctrl.name, ctrl.category.name)">Save</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Current Question Sets</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="qs in ctrl.questionsets">
+            <td><a ui-sref="Questionset({id:(qs._id)})">{{qs._id}}</a></td>
+            <td>{{qs.name}}</td>
+            <td>{{qs.category}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+
+    <!-- <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Add new Question </span></div>
+        <div class="formcontainer">
+            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl.question._id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="question">Question</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.question" id="question" class="username form-control input-sm" placeholder="Enter your question" required ng-minlength="3"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.question.$error.required">This is a required field</span>
+                                <span ng-show="myForm.question.$error.minlength">Minimum length required is 3</span>
+                                <span ng-show="myForm.question.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="answera">Answer a)</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.answers[0]['a']" id="answera" class="form-control input-sm" placeholder="Enter First answer"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="answerb">Answer b)</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.answers[0]['b']" id="answerb" class="form-control input-sm" placeholder="Enter second answer"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="answerc">Answer c)</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.answers[0]['c']" id="answera" class="form-control input-sm" placeholder="Enter thirt answer"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="answerd">Answer d)</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.answers[0]['d']" id="answera" class="form-control input-sm" placeholder="Enter fourth answer"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="answer">Correct answer</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.answer" id="answer" class="form-control input-sm" placeholder="Enter Correct answer"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="score">Score</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.question.score" id="answera" class="form-control input-sm" placeholder="Enter Score"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl.question._id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">List of Questions </span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID.</th>
+                        <th>Question</th>
+                        <th>Answers[a]</th>
+                        <th>Answers[b]</th>
+                        <th>Answers[c]</th>
+                        <th>Answers[d]</th>
+                        <th>Correct answer</th>
+                        <th>Score</th>
+                        <th width="100"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in ctrl.questions">
+                        <td><span ng-bind="u._id"></span></td>
+                        <td><span ng-bind="u.question"></span></td>
+                        <td><span ng-bind="u.answers[0]['a']"></td>
+                        <td><span ng-bind="u.answers[0]['b']"></td>
+                        <td><span ng-bind="u.answers[0]['c']"></td>
+                        <td><span ng-bind="u.answers[0]['d']"></td>
+                        <td><span ng-bind="u.answer"></span></td>
+                        <td><span ng-bind="u.score"></span></td>
+                        <td>
+                        <button type="button" ng-click="ctrl.edit(u._id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u._id)" class="btn btn-danger custom-width">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+</div>

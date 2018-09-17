@@ -1,0 +1,53 @@
+<div ng-controller="QuestionSetController as qsc">
+  <p>Question Set ID: {{qsc.questionset._id}}</p>
+  <p>Question Set name: {{qsc.questionset.name}}</p>
+  <p>Question Set category: {{qsc.questionset.category}}</p>
+  <form>
+    <div class="form-group">
+      <label for="id">ID: </label>
+      <input type="text" class="form-control" id="id" ng-model='qsc.question.id' disabled>
+    </div>
+    <div class="form-group">
+      <label for="question">Question: </label>
+      <input type="text" class="form-control" id="question" ng-model="qsc.question.question" placeholder="Enter Question">
+    </div>
+    <div class="form-group">
+      <label for="answer">Correct Answer: </label>
+      <input type="text" class="form-control" id="answer" ng-model="qsc.question.correct_answer" placeholder="Enter Correct answer">
+    </div>
+    <div class="form-group">
+      <label for="score">Score: </label>
+      <input type="number" class="form-control" id="score" ng-model="qsc.question.score" placeholder="Enter question's score">
+    </div>
+    <div class="form-group">
+      <button ng-click="qsc.addNewChoice()" class="btn btn-success">Add Choice</button>
+    </div>
+    <div class="form-group" data-ng-repeat="choice in qsc.question.answers">
+          <label for="choice">Choice {{choice.id}}</label>
+          <input class="form-control" type="text" ng-model="choice.value" id="choice" placeholder="Enter a possible answer" >
+          <button ng-click="qsc.removeNewChoice()" class="btn btn-danger">Remove Choice</button>
+      </div>
+    <button type="submit" class="btn btn-primary" ng-click="qsc.addQuestion()">Submit</button>
+  </form>
+  <div class="container">
+    <h2>Questions in this Question Set:</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Question</th>
+          <th>Correct answer</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="qs in qsc.questionset.questions">
+          <td>{{qs.id}}</td>
+          <td>{{qs.question}}</td>
+          <td>{{qs.correct_answer}}</td>
+          <td>{{qs.score}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+</div>

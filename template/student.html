@@ -1,0 +1,29 @@
+<div class="text-center" ng-controller= "StudentController as sc">
+  <p>ID: {{sc.student.id}}</p>
+  <p>Name: {{sc.student.firstname}}</p>
+  <p>Last Name: {{sc.student.lastname}}</p>
+  <!-- <p>Score: {{sc.student.score}}</p> -->
+
+  <h1>Results status:<h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Testset</th>
+          <th>category</th>
+          <th>Date of Exam</th>
+          <th>score</th>
+          <th>answers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="result in sc.results">
+          <td>{{result.q_id}}</td>
+          <td>{{result.category}}</td>
+          <td>{{result.timestamp * 1000 | date: 'short'}}</td>
+          <td>{{result.score}}</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-success" ng-click="sc.get_excel()">Export to Excel</button>
+</div>

@@ -1,0 +1,23 @@
+<div class="text-center" ng-controller= "StudentsController as sc">
+<table id="students" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="s in sc.students">
+      <td><a ui-sref="Student({id:(s._id)})">{{s.id}}</a></td>
+      <td>{{s.firstname}}</td>
+      <td>{{s.lastname}}</td>
+    </tr>
+  </tbody>
+</table>
+<!-- <button id="saveAsExcl" class="btn btn-success">Export to excel</button> -->
+<!-- <button class="btn btn-success" ng-click="sc.exportToExcel('#students')">
+		 Export to Excel
+	</button> -->
+  <button class="btn btn-success" onclick="window.location.href='http://localhost:3000/students/getexcel'">Export to Excel</button>
+</div>
