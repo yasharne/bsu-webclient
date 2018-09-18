@@ -33,7 +33,6 @@ App.controller('StudentController', ['$scope', 'StudentService', '$window', func
           self.fetchStudent($scope.id);
           self.fetchResults($scope.id);
           self.get_excel = function(){
-            console.log('jjijijijiji');
-            $window.open('http://localhost:3000/students/' + self.student._id + '/results/getexcel', '_blank')
+            $window.open('https://shrouded-plateau-63841.herokuapp.com/students/' + self.student._id + '/results/getexcel', '_blank')
           }
       }]);
