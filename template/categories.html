@@ -1,0 +1,25 @@
+<div class="generic-container" ng-controller="CategoryController as ctrl">
+  <form>
+    <div class="form-group">
+    <label for="categoryName">Enter new category name</label>
+    <input type="text" class="form-control" id="categoryName" ng-model="ctrl.category" placeholder="Enter category name">
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="ctrl.newCategory()">Submit</button>
+  </form>
+  <h2>categories<h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="c in ctrl.categories">
+          <td>{{c._id}}</td>
+          <td>{{c.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>

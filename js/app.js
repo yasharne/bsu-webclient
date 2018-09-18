@@ -11,10 +11,6 @@ App.config(['$httpProvider', '$stateProvider', '$urlRouterProvider',
         url: '/',
           templateUrl: "template/home.html"
       })
-      // .state('Manage', {
-      //   url: '/manage',
-      //     templateUrl: "template/manage.html"
-      // })
       .state('Students', {
           url:'/students',
           templateUrl: 'template/students.html'
@@ -26,10 +22,10 @@ App.config(['$httpProvider', '$stateProvider', '$urlRouterProvider',
             $scope.id = $stateParams.id;
           }
       })
-      // .state('Questions', {
-      //     url: '/questions',
-      //     templateUrl: 'template/questions.html'
-      // })
+      .state('Categories', {
+          url: '/categories',
+          templateUrl: 'template/categories.html'
+      })
       .state('Questionsets', {
           url: '/questionsets',
           templateUrl: 'template/questionsets.html'
@@ -41,11 +37,4 @@ App.config(['$httpProvider', '$stateProvider', '$urlRouterProvider',
             $scope.id = $stateParams.id;
           }
       })
-      .state('Property', {
-          url: '/dashboard/property/{p_id}',
-          templateUrl: 'template/property',
-          controller: function ($scope, $stateParams) {
-              $scope.p_id = $stateParams.p_id;
-          }
-      });
 }]);

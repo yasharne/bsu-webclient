@@ -12,12 +12,22 @@ App.controller('QuestionSetController', ['$scope', 'QuestionSetService', functio
           };
 
           self.getQuestionId = function(){
-            try{
-              self.question.id = self.questionset.questions.length + 1;
-            }
-            catch(error){
-              self.question.id = 1;
-            }
+            // try{
+            //   self.biggest = 0;
+            //   for (var i = 0; i < self.questionset.questions.length; i++) {
+            //     console.log(self.questionset.questions[i].id);
+            //     if (self.questionset.questions[i].id > self.biggest) {
+            //       self.biggest = self.questionset.questions[i].id;
+            //     }
+            //   }
+            //   self.question.id = self.biggest + 1;
+            //   // self.question.id = self.questionset.questions.length + 1;
+            // }
+            // catch(error){
+            //   console.log(error);
+            //   self.question.id = 1;
+            // }
+            self.question.id = Math.random().toString(36).substr(2, 9);
           };
 
           self.fetchQuestionset = function(id){
@@ -32,7 +42,7 @@ App.controller('QuestionSetController', ['$scope', 'QuestionSetService', functio
                     'score': 0,
                     'answers': []
                   };
-                  self.question.id++;
+                  self.getQuestionId();
                 },
                 function(errResponse) {
                   console.error('Error fetching questionset ' + id);
@@ -59,11 +69,9 @@ App.controller('QuestionSetController', ['$scope', 'QuestionSetService', functio
           };
 
           self.addQuestion = function(){
-            console.log('hereeeeee');
             for (var i = 0; i < self.question.answers.length; i++) {
               delete self.question.answers[i]["$$hashKey"]
             }
-            console.log(self.question);
             QuestionSetService.addQuestion(self.question, $scope.id)
               .then(
                 self.fetchQuestionset($scope.id),
