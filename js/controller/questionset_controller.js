@@ -1,6 +1,7 @@
 'use strict';
 
-App.controller('QuestionSetController', ['$scope', 'QuestionSetService', function($scope, QuestionSetService) {
+App.controller('QuestionSetController', ['$state', '$scope', 'QuestionSetService',
+ function($state, $scope, QuestionSetService) {
           var self = this;
           self.questionset = {};
           self.question = {
@@ -85,26 +86,33 @@ App.controller('QuestionSetController', ['$scope', 'QuestionSetService', functio
 
           self.fetchQuestionset($scope.id);
 
-          // self.newQuestionSet = function(name, category){
-          //   var questionSet = {'name': name, 'category': category};
-          //   QuestionService.newQuestionSet(questionSet)
-          //     .then(
-          //       self.fetchAllQuestionSets,
-          //       function(err){
-          //         console.error(err);
-          //       }
-          //     )
-          // };
-          //
-          // self.fetchAllQuestionSets = function(){
-          //   QuestionService.fetchQuestionSets()
-          //     .then(
-          //       function(d) {
-          //         self.questionsets = d;
-          //       },
-          //       function(errResponse) {
-          //         console.error('Error fetching questionsets');
-          //       }
-          //     )
-          // };
+          self.deleteQuestionSet = function() {
+            QuestionSetService.deleteQuestionSet($scope.id)
+              .then(
+                $state.go("Questionsets"),
+                function(err){
+                  console.error("error updating questionset");
+                }
+              )
+          };
+
+          self.deleteQuestion = function(questionId) {
+            QuestionSetService.deleteQuestion($scope.id, questionId)
+              .then(
+                self.fetchQuestionset($scope.id),
+                function(err){
+                  console.error("error deleting question");
+                }
+              )
+          };
+
+          self.editQuestion = function(id) {
+            for (var obj in self.questionset.questions) {
+              if (self.questionset.questions.hasOwnProperty(obj)) {
+                if (self.questionset.questions[obj].id == id) {
+                  self.question = self.questionset.questions[obj]
+                }
+              }
+            }
+          }
       }]);

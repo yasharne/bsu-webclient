@@ -45,7 +45,7 @@ App.factory('QuestionService', ['$http', '$q', function($http, $q){
 
   function fetchQuestionSets() {
     var deferred = $q.defer();
-    $http.get(QUESTIONSET_SERVICE_URI)
+    $http.get(QUESTIONSET_SERVICE_URI, {headers:{'Cache-Control': 'no-cache'}})
         .then(
         function (response) {
             deferred.resolve(response.data);

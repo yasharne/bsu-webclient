@@ -3,15 +3,16 @@
     <title>BSU Telegram bot management console</title>
     <meta charset="utf-8"/>
      <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+     <link rel="stylesheet" href="css/angular-moment-picker.min.css" type="text/css">
   </head>
   <body ng-app="myApp" class="ng-cloak">
 
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -25,7 +26,7 @@
         <li><a ui-sref="Students">Students</a></li>
         <li><a ui-sref="Questionsets">Questionsets</a></li>
         <li><a ui-sref="Categories">Categories</a></li>
-
+        <li><a ui-sref="Results">Results</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -38,24 +39,26 @@
 
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script> -->
-
       <script src="js/jquery-3.3.1.min.js"></script>
       <script src="js/jquery.table2excel.min.js"></script>
-
       <script src="js/bootstrap.min.js"></script>
       <script src="js/angular.js"></script>
       <script src="js/angular-ui-router.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
+      <script src="js/angular-moment-picker.min.js"></script>
       <script src="js/app.js"></script>
       <script src="js/service/question_service.js"></script>
       <script src="js/service/students_service.js"></script>
       <script src="js/service/student_service.js"></script>
       <script src="js/service/questionset_service.js"></script>
       <script src="js/service/category_service.js"></script>
+      <script src="js/service/result_service.js"></script>
       <script src="js/controller/question_controller.js"></script>
       <script src="js/controller/students_controller.js"></script>
       <script src="js/controller/student_controller.js"></script>
       <script src="js/controller/questionset_controller.js"></script>
       <script src="js/controller/category_controller.js"></script>
+      <script src="js/controller/result_controller.js"></script>
 
   </body>
 </html>

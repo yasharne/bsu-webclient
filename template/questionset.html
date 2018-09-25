@@ -38,6 +38,7 @@
           <th>Question</th>
           <th>Correct answer</th>
           <th>Score</th>
+          <th>Operations</th>
         </tr>
       </thead>
       <tbody>
@@ -46,8 +47,13 @@
           <td>{{qs.question}}</td>
           <td>{{qs.correct_answer}}</td>
           <td>{{qs.score}}</td>
+          <td>
+            <button type="button" class="btn btn-info" ng-click="qsc.editQuestion(qs.id)">Edit</button>
+            <button type="button" class="btn btn-danger" ng-click="qsc.deleteQuestion(qs.id)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
 </div>
+<button type="button" class="btn btn-danger" ng-click="qsc.deleteQuestionSet()">Delete Question Set</button>
 </div>

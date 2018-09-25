@@ -1,0 +1,51 @@
+<div ng-controller= "ResultController as rc">
+  <h1>Results:</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student</th>
+          <th>Questionset</th>
+          <th>category</th>
+          <th>Begin time</th>
+          <th>End time</th>
+          <th>Score</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="result in rc.results">
+          <td>{{result._id}}</td>
+          <td>{{result.s_id.firstname}} {{result.s_id.lastname}}</td>
+          <td>{{result.q_id.name}}</td>
+          <td>{{result.category}}</td>
+          <td>{{result.begin_time * 1000 | date: 'short'}}</td>
+          <td>{{result.endtime * 1000 | date: 'short'}}</td>
+          <td>{{result.score}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="form-inline">
+         <div class="form-group">
+           <input class="form-control"
+              ng-model="rc.begin"
+              ng-model-options="{ updateOn: 'blur' }"
+              placeholder="Select begin time..."
+              moment-picker="rc.begin"
+              locale="en">
+         </div>
+         <div class="form-group">
+           <input class="form-control"
+              ng-model="rc.end"
+              ng-model-options="{ updateOn: 'blur' }"
+              placeholder="Select end time..."
+              moment-picker="rc.end"
+              locale="en">
+         </div>
+         <div class="form-group">
+           <label for="testset">Question set: </label>
+           <select ng-options="cat for cat in rc.answered_categories" ng-model="rc.chosen_category" id="testset"></select>
+         </div>
+         <div class="form-group"><button class="btn btn-success" ng-click="rc.export()">Export to Excel</button></div>
+    </form>
+</div>

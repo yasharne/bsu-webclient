@@ -7,7 +7,9 @@ App.factory('QuestionSetService', ['$http', '$q', function($http, $q){
 
   var factory = {
       fetchQuestionset: fetchQuestionset,
-      addQuestion: addQuestion
+      addQuestion: addQuestion,
+      deleteQuestionSet: deleteQuestionSet,
+      deleteQuestion: deleteQuestion
   };
 
   return factory;
@@ -41,6 +43,36 @@ App.factory('QuestionSetService', ['$http', '$q', function($http, $q){
           }
       );
       return deferred.promise;
+  }
+
+  function deleteQuestionSet(id) {
+    var deferred = $q.defer();
+    $http.delete(QUESTIONSET_SERVICE_URI+id)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while deleting questionset ' + id);
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
+  }
+
+  function deleteQuestion(questionSetId, QuestionId) {
+    var deferred = $q.defer();
+    $http.delete(QUESTIONSET_SERVICE_URI + questionSetId + "/" + QuestionId)
+        .then(
+        function (response) {
+            deferred.resolve(response.data);
+        },
+        function(errResponse){
+            console.error('Error while deleting question ' + QuestionId);
+            deferred.reject(errResponse);
+        }
+    );
+    return deferred.promise;
   }
 
 }]);
